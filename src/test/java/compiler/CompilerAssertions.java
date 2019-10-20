@@ -67,7 +67,7 @@ public class CompilerAssertions {
         JavaFileObject source = createJavaFileObject(code);
         List<?> diagnostics = gatherDiagnostics(source);
         assertThat(diagnostics)
-                .withFailMessage("This code should not compile but does: %s", code)
+                .withFailMessage("This code should not compile but does:\n```\n%s\n```", code)
                 .isNotEmpty();
     }
 
@@ -75,7 +75,7 @@ public class CompilerAssertions {
         JavaFileObject source = createJavaFileObject(code);
         List<String> diagnosticMessages = gatherDiagnosticMessages(source);
         assertThat(diagnosticMessages)
-                .withFailMessage("This code should compile cleanly but does not: %s\n\n%s",
+                .withFailMessage("This code should compile cleanly but does not:\n```\n%s\n```\n\n%s",
                         code, String.join("\n\n", diagnosticMessages))
                 .isEmpty();
     }
@@ -84,7 +84,7 @@ public class CompilerAssertions {
         JavaFileObject source = createJavaFileObject(clazz);
         List<String> diagnosticMessages = gatherDiagnosticMessages(source);
         assertThat(diagnosticMessages)
-                .withFailMessage("This class should compile cleanly but does not: %s\n\n%s",
+                .withFailMessage("This class should compile cleanly but does not:\n%s\n\n%s",
                         clazz, String.join("\n\n", diagnosticMessages))
                 .isEmpty();
     }
